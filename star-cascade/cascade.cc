@@ -15,7 +15,7 @@
 #include "timer.h"
 #include <vector>
 #include <cmath>
-
+#define INFINITY 1e8
 using namespace std;
 
 // timers

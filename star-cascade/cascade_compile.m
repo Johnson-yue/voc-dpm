@@ -22,9 +22,9 @@ function cascade_compile(opt, verb)
 % your project.
 % -------------------------------------------------------
 
-if ispc
-  error('This code is not supported on Windows.');
-end
+%if ispc
+  %error('This code is not supported on Windows.');
+%end
 
 if nargin < 1
   opt = true;

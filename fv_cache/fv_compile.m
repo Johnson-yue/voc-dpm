@@ -22,9 +22,9 @@ function fv_compile(opt, verb)
 % your project.
 % -------------------------------------------------------
 
-if ispc
-  error('This code is not supported on Windows.');
-end
+%if ispc
+ % error('This code is not supported on Windows.');
+%end
 
 if nargin < 1
   opt = true;
@@ -34,7 +34,7 @@ if nargin < 2
   verb = false;
 end
 
-mexcmd = 'mex -outdir bin -largeArrayDims';
+mexcmd = 'mex -outdir bin';
 
 if verb
   mexcmd = [mexcmd ' -v'];
@@ -50,14 +50,17 @@ end
 
 mexcmd = [mexcmd ' CXXFLAGS="\$CXXFLAGS -Wall -fopenmp"'];
 mexcmd = [mexcmd ' LDFLAGS="\$LDFLAGS -Wall -fopenmp"'];
-mexcmd = [mexcmd ' fv_cache/fv_cache.cc fv_cache/obj_func.cc'];
 
+%mexcmd = [mexcmd ' CXXFLAGS="\$CXXFLAGS -Wall "'];
+%mexcmd = [mexcmd ' LDFLAGS="\$LDFLAGS -Wall "'];
+
+mexcmd = [mexcmd ' fv_cache/fv_cache.cc fv_cache/obj_func.cc'];
 try
-  eval(mexcmd);
+  eval(mexcmd)
 catch e
   % The fv_cache uses static structures to maintain the cache in memory.
   % To avoid hard to track bugs, the fv_cache locks itself so that the
   % mex binary cannot be unloaded and reloaded without explicitly first
   % unlocking the binary.
-  warning(e.identifier, 'Maybe you need to call fv_cache(''unlock'') first?');
+  warning(e.identifier, 'Maybe you need to call fv_cache(''unlock'') first?')
 end

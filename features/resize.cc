@@ -15,6 +15,7 @@
 #include <string.h>
 #include "mex.h"
 
+#define bzero(a, b) memset(a, 0, b) 
 /*
  * Fast image subsampling.
  * This is used to construct the feature pyramid.
@@ -45,7 +46,10 @@ void resize1dtran(double *src, int sheight, double *dst, int dheight,
   // we cache the interpolation values since they can be 
   // shared among different columns
   int len = (int)ceil(dheight*invscale) + 2*dheight;
-  alphainfo ofs[len];
+  //alphainfo ofs[len];
+  struct alphainfo *ofs = (struct alphainfo *)malloc(sizeof(struct alphainfo)*len);  // modefiy
+
+
   int k = 0;
   for (int dy = 0; dy < dheight; dy++) {
     double fsy1 = dy * invscale;
@@ -75,6 +79,8 @@ void resize1dtran(double *src, int sheight, double *dst, int dheight,
       ofs[k].si = sy2;
       ofs[k++].alpha = (fsy2 - sy2) * scale;
     }
+
+    free(ofs);
   }
 
   // resize each column of each color channel

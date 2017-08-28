@@ -17,6 +17,7 @@
 #include <deque>
 #include <vector>
 
+#define INFINITY INT_MAX
 using namespace std;
 
 

@@ -14,6 +14,7 @@
 #include <sys/types.h>
 #include "mex.h"
 
+#define int32_t int
 /*
  * Generalized distance transforms.
  * We use a simple nlog(n) divide and conquer algorithm instead of the
