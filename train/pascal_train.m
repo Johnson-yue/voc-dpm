@@ -35,6 +35,12 @@ if nargin < 3
 end
 
 conf = voc_config();
+%--------add by yq -------------------------
+if strcmp(cls, 'annotation')
+    conf.pascal.VOCopts.classes = {'annotation'};
+    conf.pascal.VOCopts.nclasses = 1;
+end
+%--------add by yq -------------------------
 cachedir = conf.paths.model_dir;
 
 % Load the training data

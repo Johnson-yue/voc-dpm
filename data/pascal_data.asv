@@ -145,10 +145,7 @@ catch
     tic_toc_print('%s: parsing negatives (%s %s): %d/%d\n', ...
                   cls, dataset_bg, year, i, length(ids));
     rec = PASreadrecord(sprintf(VOCopts.annopath, ids{i}));
-    %clsinds = strmatch(cls, {rec.objects(:).class}, 'exact');    % src
-    %code
-    clsinds = strmatch('person', {rec.objects(:).class}, 'exact');  % by yq 
-    
+    %clsinds = strmatch(cls, {rec.objects(:).class}, 'exact');
     if length(clsinds) == 0
       dataid             = dataid + 1;
       numneg             = numneg+1;
